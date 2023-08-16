@@ -17,34 +17,32 @@ const MediaQuery = ({orientation, minResolution, maxResolution, minWidth, maxWid
                         : MediaQueryProps) => {
 
     function mediaQueryString(): string {
-        let query = '';
-        if (orientation){
-            query += (`(orientation: ${orientation}), `);
-        }
-        if(typeof minResolution === 'number'){
-            query += (`(min-resolution: ${minResolution}dppx), `);
-        } else{
-            query += (`(min-resolution: ${minResolution}), `);
-        }
-        if(typeof maxResolution === 'number'){
-            query += (`(max-resolution: ${maxResolution}dppx), `);
-        }else{
-            query += (`(max-resolution: ${maxResolution}), `);
-        }
-        if (minWidth) {
-            query += (`(min-width: ${minWidth}px), `);
-        }
-        if (maxWidth) {
-            query += (`(max-width: ${maxWidth}px), `);
-        }
-        if (minHeight) {
-            query += (`(min-height: ${minHeight}px), `);
-        }
-        if (maxHeight) {
-            query += (`(max-height: ${maxHeight}px), `);
+        let query: string[] = [];
+        switch (true){
+            case !!orientation:
+                query.push(`(orientation: ${orientation})`);
+            case typeof minResolution === 'number':
+                query.push(`(min-resolution: ${minResolution}dppx)`);
+            case typeof minResolution === 'string':
+                query.push(`(min-resolution: ${minResolution})`);
+            case typeof maxResolution === 'number':
+                query.push(`(max-resolution: ${maxResolution}dppx)`);
+            case typeof maxResolution === 'string':
+                query.push(`(max-resolution: ${maxResolution})`);
+            case !!minWidth:
+                query.push(`(min-width: ${minWidth}px)`);
+            case !!maxWidth:
+                query.push(`(max-width: ${maxWidth}px)`);
+            case !!minHeight:
+                query.push(`(min-height: ${minHeight}px)`);
+            case !!maxHeight:
+                query.push(`(max-height: ${maxHeight}px)`);
+            default:
+                break;
+
         }
 
-        return query.slice(0, -2);
+        return query.join(',');
     }
 
     const matches = useMediaQuery({query: mediaQueryString()});
