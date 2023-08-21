@@ -1,5 +1,4 @@
-import React, {Fragment} from 'react';
-import {ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import {useMediaQuery} from "../hooks/useMediaQuery";
 
 interface MediaQueryProps{
@@ -17,32 +16,25 @@ const MediaQuery = ({orientation, minResolution, maxResolution, minWidth, maxWid
                         : MediaQueryProps) => {
 
     function mediaQueryString(): string {
-        let query: string[] = [];
-        switch (true){
-            case !!orientation:
-                query.push(`(orientation: ${orientation})`);
-            case typeof minResolution === 'number':
-                query.push(`(min-resolution: ${minResolution}dppx)`);
-            case typeof minResolution === 'string':
-                query.push(`(min-resolution: ${minResolution})`);
-            case typeof maxResolution === 'number':
-                query.push(`(max-resolution: ${maxResolution}dppx)`);
-            case typeof maxResolution === 'string':
-                query.push(`(max-resolution: ${maxResolution})`);
-            case !!minWidth:
-                query.push(`(min-width: ${minWidth}px)`);
-            case !!maxWidth:
-                query.push(`(max-width: ${maxWidth}px)`);
-            case !!minHeight:
-                query.push(`(min-height: ${minHeight}px)`);
-            case !!maxHeight:
-                query.push(`(max-height: ${maxHeight}px)`);
-            default:
-                break;
-
-        }
-
-        return query.join(',');
+        const params = {
+            orientation,
+            "min-resolution": minResolution,
+            "max-resolution": maxResolution,
+            "min-width": minWidth,
+            "max-width": maxWidth,
+            "min-height": minHeight,
+            "max-height": maxHeight
+        };
+        return Object.entries(params)
+            .filter(([key, value]) => !!value)
+            .map(([key, value]) => {
+                if (typeof value === 'number') {
+                    return (`${key}: ${value}dppx`);
+                } else {
+                    return (`${key}: ${value}`);
+                }
+            })
+            .join(',');
     }
 
     const matches = useMediaQuery({query: mediaQueryString()});

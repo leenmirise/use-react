@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef, useCallback} from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 export const useDocumentVisibility = () => {
     const [visible, setVisible] = useState(!document.hidden);
