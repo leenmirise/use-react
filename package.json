@@ -1,0 +1,48 @@
+{
+  "name": "@leenmirise/react-use-visibility-mediaquery",
+  "version": "1.0.7",
+  "type": "module",
+  "private": false,
+  "source": "./scr/index.ts",
+  "main": "./dist/index.cjs",
+  "umd:main": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
+  "publishConfig": {
+    "source": "./scr/index.ts",
+    "main": "./dist/index.cjs"
+  },
+  "scripts": {
+    "build": "microbundle --no-compress --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react --globals react/jsx-runtime=jsx --tsconfig tsconfig.json --input scr/index.ts --output dist/index.cjs",
+    "dev": "microbundle watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.4.9",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "@web-bee-ru/eslint-plugin": "^0.6.3",
+    "microbundle": "^0.15.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.9",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "@web-bee-ru/eslint-plugin": "^0.6.3",
+    "microbundle": "^0.15.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.1.6"
+  }
+}
